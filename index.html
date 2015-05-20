@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Frontend-nanodegree-neighborhoodmap by bt7893</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Frontend-nanodegree-neighborhoodmap</h1>
+      <h2 class="project-tagline">Project P5: Neighborhood Map Project</h2>
+      <a href="https://github.com/bt7893/frontend-nanodegree-neighborhoodmap" class="btn">View on GitHub</a>
+      <a href="https://github.com/bt7893/frontend-nanodegree-neighborhoodmap/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/bt7893/frontend-nanodegree-neighborhoodmap/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h2>
+<a id="neighborhood-map-project-description" class="anchor" href="#neighborhood-map-project-description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Neighborhood Map Project Description</h2>
+
+<p>This program demonstrates the use of Google Maps and Yelp! APIs as well as utilizing the Knockout MVVM patterns. The purpose of the app is to perform a local search of businesses around the downtown Dallas, TX area. You can perform keyword searches such as "pizza", "automotive" or "post office", and the app will return a list of search results with markers located on the map as well as a list of businesses on the left panel. </p>
+
+<h3>
+<a id="interface-design-and-map-functionality" class="anchor" href="#interface-design-and-map-functionality" aria-hidden="true"><span class="octicon octicon-link"></span></a>Interface Design and Map functionality</h3>
+
+<p>The interface has a list view of the items you can tour, a search box to look up additional locations, and an info window that displays the business details. The map is customized via Google Maps API to compliment Yelp! display requirements and provide an effortless and fun search experience for the user.</p>
+
+<h3>
+<a id="app-functionality" class="anchor" href="#app-functionality" aria-hidden="true"><span class="octicon octicon-link"></span></a>App Functionality</h3>
+
+<p>Upon launching the site, the app does a default search for 'restaurant'. The map will be populated with markers that represents businesses that relates to the search. Clicking on each marker will display an info window that will yield information about the business. The info window pulls the data from Yelp! api. You can dismiss the info window by clicking on the X on the top right to close. Each new search will place markers in the map, and the map auto-centers &amp; auto-zooms via map-bounds to encompass all the markers in the viewport. Clicking on each marker will pan the map to include the info window. The list view will provide the business thumbnail, rating, review count as well as a button link to Yelp! website for the focus item.</p>
+
+<h3>
+<a id="app-architecture" class="anchor" href="#app-architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>App Architecture</h3>
+
+<p>The app uses Knockout MVVM patterns. Observables update the UI, and Objects also subscribe to observable data to perform automatic updates when data becomes available from ajax calls. Minify JS is used to optimize the code.</p>
+
+<h3>
+<a id="asynchronous-data-usage" class="anchor" href="#asynchronous-data-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Asynchronous Data Usage</h3>
+
+<p>The app uses Google Maps API, Google Places API, Google Search API, Yelp! API call in a asynchronous manner.</p>
+
+<h3>
+<a id="geospatial--map-functionality" class="anchor" href="#geospatial--map-functionality" aria-hidden="true"><span class="octicon octicon-link"></span></a>Geospatial / Map functionality</h3>
+
+<p>Markers inherit the bounce animation to distinguish the focus item. Info window displays information about the business.
+The list panel returns a list of search results. Each time the marker is clicked on the map, the focus business item is highlighted on the list panel so that it compliments the info window marker of the business.</p>
+
+<h3>
+<a id="location-details-functionality" class="anchor" href="#location-details-functionality" aria-hidden="true"><span class="octicon octicon-link"></span></a>Location Details Functionality</h3>
+
+<p>Each location has additional data included in it's InfoWindow. Specifically, information about Yelp! metadata such as name of the restaurant, address, phone, snippet image and snippet url. </p>
+
+<h3>
+<a id="search-functionality" class="anchor" href="#search-functionality" aria-hidden="true"><span class="octicon octicon-link"></span></a>Search Functionality</h3>
+
+<p>The app has a search box, and implements error handling if search does not return a result.</p>
+
+<h3>
+<a id="list-view-functionality" class="anchor" href="#list-view-functionality" aria-hidden="true"><span class="octicon octicon-link"></span></a>List View Functionality</h3>
+
+<p>The app offers a list view of the locations on the map with animation. </p>
+
+<h3>
+<a id="code-quality" class="anchor" href="#code-quality" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code Quality</h3>
+
+<p>Code passes JS lint and W3C validation tests</p>
+
+<h3>
+<a id="comments" class="anchor" href="#comments" aria-hidden="true"><span class="octicon octicon-link"></span></a>Comments</h3>
+
+<p>Comments are provided throughout the code, and code naming conventions are self documenting.</p>
+
+<h3>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h3>
+
+<p>This readme file.</p>
+
+<h3>
+<a id="links" class="anchor" href="#links" aria-hidden="true"><span class="octicon octicon-link"></span></a>Links</h3>
+
+<p>Source files are located at <a href="https://github.com/bt7893/frontend-nanodegree-neighborhoodmap">https://github.com/bt7893/frontend-nanodegree-neighborhoodmap</a></p>
+
+<p>The working site is hosted at <a href="http://bt7893.github.io/frontend-nanodegree-neighborhoodmap/neighborhoodmap.html">http://bt7893.github.io/frontend-nanodegree-neighborhoodmap/neighborhoodmap.html</a></p>
+
+<h3>
+<a id="references" class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h3>
+
+<p>Where to obtain a Google Maps API Key:
+    <a href="http://www.google.com/apis/maps/signup.html">http://www.google.com/apis/maps/signup.html</a></p>
+
+<p>Where to obtain a "Yelp Web Services ID" (ywsid):
+    <a href="http://www.yelp.com/developers/getting_started/api_access">http://www.yelp.com/developers/getting_started/api_access</a></p>
+
+<p>Yelp API Documentation:
+    <a href="http://www.yelp.com/developers/documentation">http://www.yelp.com/developers/documentation</a></p>
+
+<p>Yelp API Support Forum:
+    <a href="http://groups.google.com/group/yelp-developer-support">http://groups.google.com/group/yelp-developer-support</a></p>
+
+<p>Google Maps API, Yelp! API, jQuery,  w3c, knockoutjs</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/bt7893/frontend-nanodegree-neighborhoodmap">Frontend-nanodegree-neighborhoodmap</a> is maintained by <a href="https://github.com/bt7893">bt7893</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
