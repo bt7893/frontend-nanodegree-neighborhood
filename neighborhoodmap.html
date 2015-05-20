@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>P5 - Neighborhood Map Project | Udacity</title>
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,6 @@
           <span class="input-group-btn">
             <button class="btn btn-danger" type="button" data-bind="click: updateYelpResults"><span class="glyphicon glyphicon-search"></span>Yelp!</button>
           </span>
-
         </form>
         <span>Enter a Search Category. For example: "museum", "tapas", "church"</span>
       </div>
@@ -27,6 +26,7 @@
     </div>
 
     <div id="map-canvas"></div>
+    <!-- Perform Offline Checking for Network Connection -->
     <script src="js/offline.min.js"></script>
     <script>
       Offline.options = {
@@ -40,6 +40,7 @@
     }
       Offline.check();
     </script>
+    <!-- Perform Offline Checking for Network Connection -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
     <script src="bower_components/knockout/dist/knockout.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
