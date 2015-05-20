@@ -8,7 +8,8 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="js/offline-theme-chrome.css" />
+    <link rel="stylesheet" href="css/offline-theme-chrome.css" />
+    <link rel="stylesheet" href="css/offline-language-english.css" />
   </head>
   <body>
     <div class="yelp-list">
@@ -28,16 +29,14 @@
     <!-- Perform Offline Checking for Network Connection -->
     <script src="js/offline.min.js"></script>
     <script>
-      Offline.options = {
-      checks: {image: {url: 'images/bg_hr.png'}, active: 'image'},
-      // Should we check the connection status immediatly on page load.
-      checkOnLoad: true,
-      // Should we monitor AJAX requests to help decide if we have a connection.
-      interceptRequests: true,
-      // Should we store and attempt to remake requests which fail while the connection is down.
-      requests: true,
+    var run = function(){
+      var req = new XMLHttpRequest();
+      req.timeout = 5000;
+      req.open('GET', 'http://localhost:8888/walter/0', true);
+      req.send();
     }
-      Offline.check();
+
+    setInterval(run, 3000);
     </script>
     <!-- Perform Offline Checking for Network Connection -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
