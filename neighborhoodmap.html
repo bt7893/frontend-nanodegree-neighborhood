@@ -28,7 +28,12 @@
 
     <div id="map-canvas"></div>
     <script src="js/offline.min.js"></script>
-    <script>Offline.check()</script>
+    <script>
+    Offline.options = { ... }
+    require(["x","y","domReady!"],function(x,y){
+         Offline.check();
+    })
+    </script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
     <script src="bower_components/knockout/dist/knockout.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
