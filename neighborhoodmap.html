@@ -21,7 +21,7 @@
             <button class="btn btn-danger" type="button" data-bind="click: updateYelpResults"><span class="glyphicon glyphicon-search"></span>Yelp!</button>
           </span>
         </form>
-        <span>Enter a Search Category. For example: "museum", "tapas", "church"</span>
+        <!-- <span>Enter a Search Category. For example: "museum", "tapas", "church"</span> -->
       </div>
       <ul class="results"></ul>
     </div>
@@ -37,7 +37,7 @@
       // req.open('GET', 'http://localhost:8888/walter/0', true);
       req.send();
     }
-    setInterval(run, 3000);
+    setInterval(run, 5000);
     </script>
     <!-- Perform Offline Checking for Network Connection -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>

@@ -3,6 +3,7 @@ var map;
 var allMarkers = [];
 var defaultSearchItem = 'pizza';
 var zipCode = 75202; // ZipCode for Dallas, TX
+var searchRadiusInput = 5;
 var searchRadiusInput = prompt("Please enter the radius (in miles) of your search within Downtown Dallas. You may enter a minumum of 1 mile to a maximum of 25 miles");
 validateRadius(); // sets initial search radius to 1 mile & check radius input
 var lat = 32.780030; // downtown Dallas latitute
@@ -37,7 +38,7 @@ function initialize() {
     var downtownDallas = new google.maps.LatLng(lat, long);
     // Custom Google Maps Styling
     var mapOptions = {
-        zoom: 14,
+        // zoom : 15,
         center: downtownDallas,
         mapTypeControlOptions: {
             style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
@@ -65,7 +66,6 @@ function initialize() {
     var customMapType = new google.maps.StyledMapType(mapStyles, styledMapOptions);
     map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
 }
-
 
 // Create markers on Google Map, making the marker variable as a parameter
 function addGoogleMapsMarkers(m) {
@@ -132,94 +132,115 @@ function addGoogleMapsMarkers(m) {
         // Extend the bounds to include each marker's position
         bounds.extend(position);
 
-        // Apply Google Maps event method to bind a mouseover event to the marker on event, create and show info window using the makeInfoWindow method
-        google.maps.event.addListener(infowindow, 'mouseover', (function(mk, i) {
-                return function() {
-                    makeInfoWindow(mk);
-                };
-            })(infowindow, i));
+        // Apply google maps event method to bind a mouseover event to the marker on event, create and show info window using the makeInfoWindow Method
+        /*jshint -W083 */google.maps.event
+        .addListener(infowindow, 'mouseover', (function(mk, i) {
+          return function() {
+            makeInfoWindow(mk);
+          };
+        })(infowindow, i));
 
-        // Apply Google Maps event method to bind a mouse click event to the marker on event, create and show info window using the makeInfoWindow method and animate the marker
-        google.maps.event.addListener(infowindow, 'click', (function(mk, i) {
-                return function() {
-                    makeInfoWindow(mk);
-                    toggleBounce(mk, i);
-                };
-            })(infowindow, i));
+        // Apply google maps event method to bind a mouse click event to the marker on event, create and show info window using the makeInfoWindow Method and animate the marker
+        google.maps.event
+        .addListener(infowindow, 'click', (function(mk, i){
+          return function(){
+            makeInfoWindow(mk);
+            toggleBounce(mk, i);
+          };
+        })(infowindow, i));
 
-    }
-    // Fit these bounds to the map
-    map.fitBounds(bounds);
+      }
+      // Fit these bounds to the map
+      map.fitBounds(bounds);
 
-
-    // Animate the marker
-    function toggleBounce(mk, i) {
-        // Create the variable
-        var yelpMarkerDetailUl = $('.yelp-list').find('ul'),
-            yelpMarkerDetail = yelpMarkerDetailUl.find('li'),
-            yelpMarkerDetailPos = 116 * i, // where 180 is the height of each list cell
-            activeYelpMarkerDetail = yelpMarkerDetail.eq(i);
-
-        if (mk.getAnimation() !== null) {
-            mk.setAnimation(null); // If the marker has animation attribute, remove the animation attribute
-            yelpMarkerDetailUl.removeClass('show'); // Remove the show className from the yelp-list to slide left
-            activeYelpMarkerDetail.removeClass('active'); // Remove the active className from the active yelp-list
-
-        } else {
-            // for(var am in allMarkers){
-            for (var am in allMarkers) {
-                if (allMarkers.hasOwnProperty(am)) {
-                    // iterate through all the markers and see if it has the animation attribute
-                    var isMoving = allMarkers[am].getAnimation();
-
-                    // if marker is animating and index is not self, then set the animated marker's animation attribute to null
-                    if (isMoving && am !== i) {
-                        allMarkers[am].setAnimation(null);
-                    }
-                }
-            }
-
-            // Taken from https://developers.google.com/maps/documentation/javascript/examples/marker-animations-iteration
-            mk.setAnimation(google.maps.Animation.BOUNCE);  // add the Bounce animation to the clicked marker using Google Map's animation method
-            yelpMarkerDetailUl.addClass('show').animate({ // also add the show className from the yelp-list ul dom to slide right and animate the child dom to the top
-                scrollTop: yelpMarkerDetailPos
-            }, 500); // this controls the animation smoothness
-            yelpMarkerDetailUl.find('.active').removeClass('active');
-            activeYelpMarkerDetail.addClass('active'); // also add the active className to the yelp-list ul li dom
+// Animate the marker
+function toggleBounce(mk, i) {
+  // Create the variable
+  var yelpMarkerDetailUl =  $('.yelp-list').find('ul'),
+  yelpMarkerDetail = yelpMarkerDetailUl.find('li'),
+  deviceScreenHeight = yelpMarkerDetailUl[0].clientHeight;
+  var scaleUnit = 5;
+        if (deviceScreenHeight <= 480) { // screen height for tiny devices such as iPhone 3GS
+          scaleUnit = 2;
+        } else if (deviceScreenHeight > 480 && deviceScreenHeight <= 568){ // iPhone 4 screen height
+          scaleUnit = 3;
+        } else if (deviceScreenHeight > 568 && deviceScreenHeight <= 667) { // iPhone 5 screen height
+          scaleUnit = 4;
+        } else if (deviceScreenHeight > 667 && deviceScreenHeight <= 736) { // iPhone 6 screen height
+          scaleUnit = 5;
+        } else if (deviceScreenHeight > 736 && deviceScreenHeight <= 1115) { // iPhone 6+ and iPAD screen height
+          scaleUnit = 8;
+        } else if (deviceScreenHeight > 1115 && deviceScreenHeight <= 1280) { // PC screen up to 1280px screen height
+          scaleUnit = 9;
+        } else { // PC screen higher than 1280px screen height
+          scaleUnit = 12;
         }
-    }
+  yelpListHeight = deviceScreenHeight/scaleUnit, // calculate the rough height of each list cell
+  yelpMarkerDetailPos = yelpListHeight * i,
+  /*jshint -W030 */ activeYelpMarkerDetail = yelpMarkerDetail.eq(i);
+  // console.log(yelpMarkerDetailUl[0].clientHeight);
+  // window.alert(yelpListHeight);
+  // window.alert(yelpMarkerDetailUl[0].clientHeight);
 
-    // add click event to the yelp-list ul li dom
-    $('.results').find('li').click(function() {
-        // get index of clicked element
-        var pos = $(this).index();
-        // iterate through allMarkers array
-        for (var am in allMarkers) {
-            if (allMarkers.hasOwnProperty(am)) {
-                var isMoving = allMarkers[am].getAnimation();
-                // if marker is animated, remove animation
-                if (isMoving && am !== pos) {
-                    allMarkers[am].setAnimation(null);
-                }
-            }
-        }
-        allMarkers[pos].setAnimation(google.maps.Animation.BOUNCE); // Add the Bounce animation to the marker based on click event, create and show the info window
-        makeInfoWindow(allMarkers[pos]);
-        $('.results').find('.active').removeClass('active'); // Remove the active className from the active yelp-list
-        $(this).addClass('active'); // Add the active className to the clicked element
-    });
+  if (mk.getAnimation() != null) {
+    mk.setAnimation(null); // If the marker has animation attribute, remove the animation attribute
+    yelpMarkerDetailUl.removeClass('show'); // Remove the show className from the yelp-list to slide left
+    activeYelpMarkerDetail.removeClass('active'); // Remove the active className from the active yelp-list
+
+  } else { // If marker does not have animation attribue, remove animation attribute from any other markers that are animated
+    for(var am in allMarkers){
+      if (allMarkers.hasOwnProperty(am)) { // Recommended by JSHint //
+      // iterate through all the markers and see if it has the animation attribute
+      var isMoving = allMarkers[am].getAnimation();
+      // if marker is animating and index is not self, then set the animated marker's animation attribute to null
+      if(isMoving && am !== i){
+        allMarkers[am].setAnimation(null);
+      }
+    }
+  } // Recommended by JSHint //
+    // Reference: https://developers.google.com/maps/documentation/javascript/examples/marker-animations-iteration
+    // using Google Map's animation method
+    mk.setAnimation(google.maps.Animation.BOUNCE); // add the Bounce animation to the marker based on click event, create and show the info window
+    yelpMarkerDetailUl.addClass('show').animate({ // add the show className from the yelp-list
+      scrollTop: yelpMarkerDetailPos
+    }, 500); // this controls the animation smoothness
+    yelpMarkerDetailUl.find('.active').removeClass('active'); // add the active className to the yelp-list
+    activeYelpMarkerDetail.addClass('active');
+  }
 }
 
+// add click event to the yelp-list ul li dom
+$('.results').find('li').click(function(){
+    // get index of clicked element
+    var pos = $(this).index();
+    // iterate through allMarkers array
+    for(var am in allMarkers){
+      if (allMarkers.hasOwnProperty(am)) { // Recommended by JSHint //
+      var isMoving = allMarkers[am].getAnimation();
+      // if marker is animated, remove animation
+      if(isMoving && am !== pos){
+        allMarkers[am].setAnimation(null);
+      }
+    }
+  } // Recommended by JSHint //
+
+    // Add the Bounce animation to the marker that corresponding to the clicked element index using google map's animation method, create and show the info window
+    allMarkers[pos].setAnimation(google.maps.Animation.BOUNCE);
+    makeInfoWindow(allMarkers[pos]);
+    $('.results').find('.active').removeClass('active'); // Remove the active className from the active yelp-list
+    $(this).addClass('active'); // Add the active className to the clicked element
+  });
+}
 // Check Search Radius filter
 function validateRadius(){
   if (searchRadiusInput < 1) {
     alert("Sorry, search radius cannot be less than 1. Search radius now set to 1 mile.");
-     searchRadius = 1600;
+    searchRadius = 1600;
   } else if (searchRadiusInput > 25) {
-      alert("You have exceeded the limit of the search radius. Search radius now set to 25 miles.");
-      searchRadius = 25 * 1600;
+    alert("You have exceeded the limit of the search radius. Search radius now set to 25 miles.");
+    searchRadius = 25 * 1600;
   } else {
-      searchRadius = searchRadiusInput * 1600;
+    searchRadius = searchRadiusInput * 1600;
   }
 }
 
@@ -289,7 +310,7 @@ function makeYelpList(d) {
     // Create the variable
     var $yelpList = $('.results');
     results = d.businesses,
-        element = '';
+    /*jshint -W030 */element = '';
     // Clear the yelpList to add new entries
     $yelpList.empty();
 
@@ -299,8 +320,8 @@ function makeYelpList(d) {
     // If no data is returned
     if (results.length > 0) {
         // loop through the returned data, then create the variable for to use in populating the yelp-list li Dom
-        for (var result in results) {
-           if (results.hasOwnProperty(result)) {
+        /*jshint -W089 */for (var result in results) {
+          //  if (results.hasOwnProperty(result)) { // Recommended by JSHint //
             var business = results[result],
                 name = business.name,
                 img = business.image_url,
@@ -322,7 +343,7 @@ function makeYelpList(d) {
             // create the Dom object
             var address = loc.address;
             var metaData = '<li><div class="heading row"><p class="col-sm-4 img-container">';
-            metaData += '<img src="' + img + '" height=100 width=100 class="img-thumbnail">';
+            metaData += '<img src="' + img + '" height=50 width=50 class="img-thumbnail">';
             metaData += '<img src="' + stars + '" height=17 width=84 alt="Yelp Rating"></p>';
             metaData += '<div class="col-sm-8">';
             metaData += '<h3>' + name + '</h3>';
@@ -336,7 +357,7 @@ function makeYelpList(d) {
             var marker = [name, phone, loc.lat, loc.lon, review.img, review.txt, address, url];
             markers.push(marker);
            }
-        }
+        // } // Recommended by JSHint //
 
         // add the 'element' to the yelp-list ul dom
         $yelpList.append(element);

@@ -10,7 +10,7 @@ function yelpSearchItem() {
 		ko.computed(function(){
 			yelpAjax(zipCode, self.searchTerm());
 		}, self);
-	}
+	};
 }
 
 // Start New Search Item

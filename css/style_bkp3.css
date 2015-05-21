@@ -22,32 +22,30 @@ h1 {
     text-align: center;
     background-color: rgba(255, 255, 255, 0.65)
 }
+
 .search-yelp {
     position: fixed;
     top: 15px;
     left: 320px;
     width: 500px;
-    background-color: rgba(0, 0, 0, 0.85);
-    height: 75px;
-    color: #fff;
+    background-color: rgba(0, 0, 0, 0.45);
+    height: 70px;
 }
+
 .yelp-list ul {
     position: fixed;
     top: 0;
     left: 0;
     width: 300px;
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(0, 0, 0,  0.65);
     height: 70px;
     color: #fff
 }
 
 @media (max-width: 500px) {
     .yelp-list ul,
+s
     .search-yelp {
-        width: 50%
-    }
-    .search-yelp {
-        left: 10px;
         width: 100%
     }
 }
@@ -94,23 +92,25 @@ h1 {
     border-top: 0
 }
 .yelp-list ul li:hover {
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: rgba(0, 0, 0,  0.35);
     color: #fff
 }
 .yelp-list ul li.active {
-    background-color: rgba(255, 255, 255, 1.0);
+    background-color: rgba(255, 255, 255,  1.0);
     color: #666
 }
+
+/* Smartphones (portrait) */
 @media (max-width: 500px) {
-    .yelp-list ul li h3 {
-        text-align: left;
-        font-size: 14px
+    .yelp-list ul,
+    .search-yelp {
+        width: 50%
     }
-    .yelp-list ul li p {
-        text-align: left;
-        font-size: 14px
+    .search-yelp {
+        width: 100%
     }
 }
+
 .search-yelp {
     padding: 20px;
     z-index: 10
@@ -160,13 +160,4 @@ h1 {
     color: #ff6600;
     float: right;
     margin-top: 20px
-}
-
-@media only screen and (max-width: 480px) {
-    body {
-        font-size: 12px;
-    }
-    header p {
-        padding-left: 4.5em;
-    }
 }
