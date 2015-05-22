@@ -158,29 +158,11 @@ function toggleBounce(mk, i) {
   // Create the variable
   var yelpMarkerDetailUl =  $('.yelp-list').find('ul'),
   yelpMarkerDetail = yelpMarkerDetailUl.find('li'),
-  deviceScreenHeight = yelpMarkerDetailUl[0].clientHeight;
-  var scaleUnit = 5;
-        if (deviceScreenHeight <= 480) { // screen height for tiny devices such as iPhone 3GS
-          scaleUnit = 2;
-        } else if (deviceScreenHeight > 480 && deviceScreenHeight <= 568){ // iPhone 4 screen height
-          scaleUnit = 3;
-        } else if (deviceScreenHeight > 568 && deviceScreenHeight <= 667) { // iPhone 5 screen height
-          scaleUnit = 4;
-        } else if (deviceScreenHeight > 667 && deviceScreenHeight <= 736) { // iPhone 6 screen height
-          scaleUnit = 5;
-        } else if (deviceScreenHeight > 736 && deviceScreenHeight <= 1115) { // iPhone 6+ and iPAD screen height
-          scaleUnit = 8;
-        } else if (deviceScreenHeight > 1115 && deviceScreenHeight <= 1280) { // PC screen up to 1280px screen height
-          scaleUnit = 9;
-        } else { // PC screen higher than 1280px screen height
-          scaleUnit = 12;
-        }
-  yelpListHeight = deviceScreenHeight/scaleUnit, // calculate the rough height of each list cell
+  yelpListHeight = 110, // the estimated height of each list cell
   yelpMarkerDetailPos = yelpListHeight * i,
   /*jshint -W030 */ activeYelpMarkerDetail = yelpMarkerDetail.eq(i);
   // console.log(yelpMarkerDetailUl[0].clientHeight);
   // window.alert(yelpListHeight);
-  // window.alert(yelpMarkerDetailUl[0].clientHeight);
 
   if (mk.getAnimation() != null) {
     mk.setAnimation(null); // If the marker has animation attribute, remove the animation attribute
@@ -342,12 +324,12 @@ function makeYelpList(d) {
 
             // create the Dom object
             var address = loc.address;
-            var metaData = '<li><div class="heading row"><p class="col-sm-4 img-container">';
-            metaData += '<img src="' + img + '" height=50 width=50 class="img-thumbnail">';
-            metaData += '<img src="' + stars + '" height=17 width=84 alt="Yelp Rating"></p>';
-            metaData += '<div class="col-sm-8">';
-            metaData += '<h3>' + name + '</h3>';
-            metaData += '<a class="btn btn-default btn-sm" href="' + url + '" target="_blank"><img alt="Yelp!" src="images/miniMapLogo.png" width="50" height="25"></a></p>';
+            var metaData = '<li><div class="heading row"><p class="col-sm-3 img-container">';
+            metaData += '<img src="' + img + '" height=100 width=100 class="img-thumbnail">';
+            metaData += '<img src="' + stars + '" height=17 width=84 alt="Yelp Rating" class="img-responsive">';
+            metaData += '</p><div class="col-sm-9">';
+            metaData += '<h3>' + name + '</h3><p>';
+            metaData += '<p><a class="btn btn-default btn-small" href="' + url + '" target="_blank">Yelp it!</a></p>';
             metaData += '<span>' + count + ' Reviews </span>';
             metaData += '</div></div></li>';
             // add to the 'element' variable

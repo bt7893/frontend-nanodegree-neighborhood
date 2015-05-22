@@ -24,11 +24,11 @@ h1 {
 }
 .search-yelp {
     position: fixed;
-    top: 15px;
-    left: 320px;
-    width: 500px;
-    background-color: rgba(0, 0, 0, 0.85);
-    height: 75px;
+    top: 0px;
+    left: 300px;
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.95);
+    height: 70px;
     color: #fff;
 }
 .yelp-list ul {
@@ -36,18 +36,22 @@ h1 {
     top: 0;
     left: 0;
     width: 300px;
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(0, 0, 0, 0.75);
     height: 70px;
     color: #fff
 }
-
 @media (max-width: 500px) {
     .yelp-list ul,
     .search-yelp {
         width: 50%
     }
     .search-yelp {
-        left: 10px;
+        width: 100%
+    }
+}
+@media (max-width: 620px) {
+    .search-yelp {
+        left: 0px;
         width: 100%
     }
 }
@@ -75,7 +79,7 @@ h1 {
     font-weight: 600;
     line-height: 1.42em;
     margin-top: 0;
-    color: #f47e44
+    color: #aaa
 }
 .yelp-list ul h3 span {
     border-bottom: 1px solid #ff4e00
@@ -104,7 +108,7 @@ h1 {
 @media (max-width: 500px) {
     .yelp-list ul li h3 {
         text-align: left;
-        font-size: 14px
+        font-size: 18px
     }
     .yelp-list ul li p {
         text-align: left;
@@ -112,7 +116,7 @@ h1 {
     }
 }
 .search-yelp {
-    padding: 20px;
+    padding: 10px;
     z-index: 10
 }
 .search-yelp small {
@@ -126,7 +130,7 @@ h1 {
     text-decoration: underline
 }
 .img-container {
-    text-align: center;
+    text-align: left;
     padding-top: 5px
 }
 .img-container img {
@@ -161,10 +165,9 @@ h1 {
     float: right;
     margin-top: 20px
 }
-
 @media only screen and (max-width: 480px) {
     body {
-        font-size: 12px;
+        font-size: 10px;
     }
     header p {
         padding-left: 4.5em;

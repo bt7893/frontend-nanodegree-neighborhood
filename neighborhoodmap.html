@@ -1,6 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>P5 - Neighborhood Map Project | Udacity</title>
@@ -11,41 +12,47 @@
     <link rel="stylesheet" href="css/offline-theme-chrome.css" />
     <link rel="stylesheet" href="css/offline-language-english.css" />
     <link href="http://bt7893.github.io/frontend-nanodegree-neighborhoodmap/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-  </head>
-  <body>
-    <div class="yelp-list">
-      <div class="search-yelp">
-        <form class="input-group" data-bind="submit: updateYelpResults">
-          <input type="text" class="form-control" data-bind="value: searchTerm">
-          <span class="input-group-btn">
-            <button class="btn btn-danger" type="button" data-bind="click: updateYelpResults"><span class="glyphicon glyphicon-search"></span>Yelp!</button>
-          </span>
-        </form>
-        <!-- <span>Enter a Search Category. For example: "museum", "tapas", "church"</span> -->
-      </div>
-      <ul class="results"></ul>
-    </div>
+</head>
 
+<body>
+    <div class="yelp-list">
+        <div class="search-yelp">
+            <form class="input-group" data-bind="submit: updateYelpResults">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <input type="text" id="inputHelpBlock" class="form-control" placeholder="Search for a Category" data-bind="value: searchTerm">
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-danger" type="button" data-bind="click: updateYelpResults"><span class="glyphicon glyphicon-search"></span>Yelp!</button>
+                    </div>
+                </div>
+                <span id="helpBlock" class="help-block">Search examples: "museum", "tapas" or "church"</span>
+            </form>
+        </div>
+        <ul class="results"></ul>
+    </div>
     <div id="map-canvas"></div>
-    <!-- Perform Offline Checking for Network Connection -->
+
+    <!-- Start: Offline Checking for Network Connection -->
     <script src="js/offline.min.js"></script>
     <script>
-    var run = function(){
-      var req = new XMLHttpRequest();
-      req.timeout = 5000;
-      req.open('GET', 'http://bt7893.github.io/frontend-nanodegree-neighborhoodmap/images/bg_hr.png', true);
-      // req.open('GET', 'http://localhost:8888/walter/0', true);
-      req.send();
-    }
-    setInterval(run, 5000);
+        var run = function() {
+            var req = new XMLHttpRequest();
+            req.timeout = 5000;
+            req.open('GET', 'http://bt7893.github.io/frontend-nanodegree-neighborhoodmap/images/bg_hr.png', true);
+            // req.open('GET', 'http://localhost:8888/walter/0', true);
+            req.send();
+        }
+        setInterval(run, 5000);
     </script>
-    <!-- Perform Offline Checking for Network Connection -->
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <!-- End: Offline Checking for Network Connection -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
     <script src="bower_components/knockout/dist/knockout.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
     <script src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
     <script src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
     <script src="js/app-engine.js"></script>
     <script src="js/model.js"></script>
-  </body>
+</body>
+
 </html>
